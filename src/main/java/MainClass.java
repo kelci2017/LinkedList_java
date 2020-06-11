@@ -1,5 +1,6 @@
 package main.java;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class MainClass {
@@ -50,6 +51,23 @@ public class MainClass {
 //    }
 
     public static void main(String[] args) {
+        String[] names = new String[6];
+        names[0]="Alex";
+        names[1]="Bob";
+        names[2]="Cindy";
+        names[3]="Danny";
+        names[4]="Emily";
+        //move all elements one behind
+        names[5]="Emily";
+        names[4]="Danny";
+        names[3]="Cindy";
+        names[2]="Bob";
+        names[1]="Alex";
+        names[0]="Kelci";
+
+
+//        ArrayList a = new ArrayList<String>();
+//        a.add("string");
 //        ListNode c = new ListNode(4);
 //        ListNode b = new ListNode(3,c);
 //        ListNode l1 = new ListNode(1,b);
@@ -89,6 +107,11 @@ public class MainClass {
         System.out.print("================\n");
 
         list.remove(1);
+        for (int i=0; i<list.getSize();i++){
+            System.out.print(list.getElement(i)+"\n");
+        }
+        System.out.print("Size of the list is: " + list.getSize() +"\n");
+        list.reverse();
         for (int i=0; i<list.getSize();i++){
             System.out.print(list.getElement(i)+"\n");
         }

@@ -37,12 +37,14 @@ public class SingleLinkedNodeList<T> {
         size++;
     }
 
-    public void addFirst(T e) {
+    public void addFirst(T e)
+    {
         final SingleLinkedNode<T> f = first;
         final SingleLinkedNode<T> newNode = new SingleLinkedNode<T>( e, f);
         first = newNode;
         size++;
     }
+
     public void addLast(T e) {
         SingleLinkedNode newNode = new SingleLinkedNode(e,null);
         SingleLinkedNode cur = first;
@@ -59,11 +61,12 @@ public class SingleLinkedNodeList<T> {
     }
 
 //-------------------------search for some element------------
-    public T getElement(int index) {
-        checkElementIndex(index);
+    public T getElement(int index)
+    {
         checkElementIndex(index);
         SingleLinkedNode<T> x = first;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < index; i++)
+        {
             x = x.next;
         }
         return x.val;
@@ -125,6 +128,20 @@ public class SingleLinkedNodeList<T> {
         if (!(index >= 0 && index < size))
             throw new IndexOutOfBoundsException(index + "is out of bounds");
     }
+
+//------------------------------------------------
+    public SingleLinkedNode<T> reverse(){
+        SingleLinkedNode<T> last = null;
+        while(first != null){
+            SingleLinkedNode<T> next = first.next;
+            first.next = last;
+            last = first;
+            first = next;
+        }
+        first = last;
+        return first;
+    }
+
 //---------------------SingleLinkedNode class----------------
     private class SingleLinkedNode<T> {
         T val;
