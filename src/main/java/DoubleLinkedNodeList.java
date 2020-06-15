@@ -1,8 +1,8 @@
 package main.java;
 
 public class DoubleLinkedNodeList<T> {
-    LinkedNode<T> first;
-    LinkedNode<T> last;
+    private LinkedNode<T> first;
+    private LinkedNode<T> last;
     int size;
 
     //------------------------Add element----------------------
@@ -86,7 +86,7 @@ public class DoubleLinkedNodeList<T> {
         checkElementIndex(index);
         return unlink(getNode(index));
     }
-    //----------------------------------------------
+    //--------------------get node based on index--------------------------
 
     private LinkedNode<T> getNode(int index) {
         checkElementIndex(index);
@@ -102,7 +102,7 @@ public class DoubleLinkedNodeList<T> {
             return x;
         }
     }
-
+    //--------------------remove node based on index--------------------------
     private T unlink(LinkedNode<T> x) {
         final T element = x.val;
         final LinkedNode<T> next = x.next;
@@ -133,8 +133,8 @@ public class DoubleLinkedNodeList<T> {
             throw new IndexOutOfBoundsException(index + "is out of bounds");
     }
 
-    //---------------------------------------------------
-    private class LinkedNode<T> {
+    //------------------------private LinkedNode class---------------------------
+    private static class LinkedNode<T> {
         T val;
         LinkedNode<T> next;
         LinkedNode<T> prev;
@@ -146,7 +146,7 @@ public class DoubleLinkedNodeList<T> {
             this.val = val;
         }
 
-        LinkedNode(LinkedNode pre, T val, LinkedNode next) {
+        LinkedNode(LinkedNode<T> pre, T val, LinkedNode<T> next) {
             this.prev = pre;
             this.val = val;
             this.next = next;

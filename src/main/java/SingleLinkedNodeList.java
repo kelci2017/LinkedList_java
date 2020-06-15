@@ -2,8 +2,8 @@ package main.java;
 
 public class SingleLinkedNodeList<T> {
 
-    SingleLinkedNode<T> first;
-    int size;
+    private SingleLinkedNode<T> first;
+    private int size;
 
 //------------------------Add element----------------------
     public void add(T e) {
@@ -12,7 +12,8 @@ public class SingleLinkedNodeList<T> {
 
     public void add(int index, T element) {
         checkElementIndex(index);
-        SingleLinkedNode newNode = new SingleLinkedNode(element,null);
+        SingleLinkedNode<T> newNode =
+                new SingleLinkedNode(element, null);
         if (index == 0) {
             addFirst(element);
             return;
@@ -21,17 +22,17 @@ public class SingleLinkedNodeList<T> {
             addLast(element);
             return;
         }
-        SingleLinkedNode pre = null;
-        SingleLinkedNode cur = first;
+        SingleLinkedNode<T> prev = null;
+        SingleLinkedNode<T> curr = first;
         int a = 0;
-        while (cur != null) {
+        while (curr != null) {
             if (index == a) {
-                pre.next = newNode;
-                newNode.next = cur;
+                prev.next = newNode;
+                newNode.next = curr;
                 break;
             }
-            pre = cur;
-            cur = cur.next;
+            prev = curr;
+            curr = curr.next;
             a++;
         }
         size++;
@@ -40,14 +41,13 @@ public class SingleLinkedNodeList<T> {
     public void addFirst(T e)
     {
         final SingleLinkedNode<T> f = first;
-        final SingleLinkedNode<T> newNode = new SingleLinkedNode<T>( e, f);
-        first = newNode;
+        first = new SingleLinkedNode<T>(e, f);
         size++;
     }
 
     public void addLast(T e) {
-        SingleLinkedNode newNode = new SingleLinkedNode(e,null);
-        SingleLinkedNode cur = first;
+        SingleLinkedNode<T> newNode = new SingleLinkedNode(e, null);
+        SingleLinkedNode<T> cur = first;
         if (first == null) {
             first = newNode;
             size++;
@@ -77,50 +77,59 @@ public class SingleLinkedNodeList<T> {
     }
 
 //--------------remove some element-----------------------------
-    public boolean remove(T o) {
+    public void remove(T o) {
         if (o == first.val) {
             removeFirst();
-            return true;
+            return;
         }
-        SingleLinkedNode pre = null;
-        SingleLinkedNode cur = first;
+        SingleLinkedNode<T> pre = null;
+        SingleLinkedNode<T> cur = first;
         while (cur != null) {
             if (o == cur.val) {
                 pre.next = cur.next;
                 size--;
-                return true;
+                return;
             }
             pre = cur;
             cur = cur.next;
         }
-        return false;
     }
-    public T removeFirst(){
-        T val = first.val;
+    public void removeFirst(){
         first = first.next;
         size--;
-        return val;
     }
 
-    public T remove(int index) {
-        if (index == 0) return removeFirst();
+    public void remove(int index) {
+        if (index == 0) {
+            removeFirst();
+            return;
+        }
         checkElementIndex(index);
-        SingleLinkedNode pre = null;
-        SingleLinkedNode cur = first;
-        T val = first.val;
+        SingleLinkedNode<T> prev = null;
+        SingleLinkedNode<T> curr = first;
         int a = 0;
-        while (cur != null) {
+        while (curr != null) {
             if (index == a) {
-                val = (T) cur.val;
-                pre.next = cur.next;
+                prev.next = curr.next;
                 break;
             }
-            pre = cur;
-            cur = cur.next;
+            prev = curr;
+            curr = curr.next;
             a++;
         }
         size--;
-        return val;
+    }
+
+    public boolean contain(T o){
+        SingleLinkedNode<T> x = first;
+        for (int i = 0; i < size; i++)
+        {
+            if (x.val == o) {
+                return true;
+            }
+            x = x.next;
+        }
+        return false;
     }
 
 //---------------check index------------------------
@@ -130,20 +139,21 @@ public class SingleLinkedNodeList<T> {
     }
 
 //------------------------------------------------
-    public SingleLinkedNode<T> reverse(){
+    public void reverse()
+    {
         SingleLinkedNode<T> last = null;
-        while(first != null){
+        while(first != null)
+        {
             SingleLinkedNode<T> next = first.next;
             first.next = last;
             last = first;
             first = next;
         }
         first = last;
-        return first;
     }
 
 //---------------------SingleLinkedNode class----------------
-    private class SingleLinkedNode<T> {
+    private static class SingleLinkedNode<T> {
         T val;
         SingleLinkedNode<T> next;
 
@@ -151,7 +161,7 @@ public class SingleLinkedNodeList<T> {
         SingleLinkedNode(T val) {
             this.val = val;
         }
-        SingleLinkedNode(T val, SingleLinkedNode next) {
+        SingleLinkedNode(T val, SingleLinkedNode<T> next) {
             this.val = val;
             this.next = next;
         }
