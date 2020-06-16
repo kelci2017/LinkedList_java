@@ -76,6 +76,17 @@ public class SingleLinkedNodeList<T> {
         return size;
     }
 
+    public boolean contain(T o){
+        SingleLinkedNode<T> x = first;
+        for (int i = 0; i < size; i++)
+        {
+            if (x.val == o) {
+                return true;
+            }
+            x = x.next;
+        }
+        return false;
+    }
 //--------------remove some element-----------------------------
     public void remove(T o) {
         if (o == first.val) {
@@ -120,25 +131,13 @@ public class SingleLinkedNodeList<T> {
         size--;
     }
 
-    public boolean contain(T o){
-        SingleLinkedNode<T> x = first;
-        for (int i = 0; i < size; i++)
-        {
-            if (x.val == o) {
-                return true;
-            }
-            x = x.next;
-        }
-        return false;
-    }
-
 //---------------check index------------------------
     private void checkElementIndex(int index) {
         if (!(index >= 0 && index < size))
             throw new IndexOutOfBoundsException(index + "is out of bounds");
     }
 
-//------------------------------------------------
+//-------------------Reverse-----------------------------
     public void reverse()
     {
         SingleLinkedNode<T> last = null;
